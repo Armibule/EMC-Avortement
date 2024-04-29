@@ -1,0 +1,22 @@
+<svg class="titleIcon" id="whatIcon" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="56" viewBox="-2,-2,30,54">
+    <g transform="translate(-226.62725,-156.42976)" stroke-linecap="round">
+        <path
+            d="M229.12783,171.15663c-0.1289,-16.29235 21.26405,-16.31262 21.65578,0c0.21009,8.74901 -10.67141,9.17149 -10.39001,19.97134"
+            fill="none" stroke="#4d0843" stroke-width="6">
+            <animate attributeName="stroke-width" values="6;6.5;5.5;7;6" dur="5s" repeatCount="indefinite"/>
+        </path>
+        <path
+            d="M229.21396,170.80633c-0.1289,-16.29235 21.26405,-16.31262 21.65578,0c0.21009,8.74901 -10.67141,9.17149 -10.39001,19.97134"
+            fill="none" stroke="#730664" stroke-width="4">
+            <animate attributeName="stroke-width" values="4;4.5;3.5;5;4" dur="4.5s" repeatCount="indefinite"/>
+        </path>
+        <ellipse cx="240.5" cy="202" rx="4" ry="4" fill="#730664" stroke="#4d0843" stroke-width="1">
+            <animate attributeName="stroke-width" values="0;0;1.5;1.3;1.5" dur="4s" begin="2s"/>
+            <animate attributeName="stroke-width" values="1.5;1.9;1.4;1.8;1.4;1.7;1.5;1.5;1.5" dur="4s" begin="6s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="193;202;202;202" dur="4s" begin="2s"/>
+            <animate attributeName="rx" values="3;4;4.5;3.7;4.2;3.9;4;4;4;4" dur="4s" begin="2s"/>
+            <animate attributeName="ry" values="5;4;3.5;4.3;3.8;4.1;4;4;4;4" dur="4s" begin="2s"/>
+            <animate attributeName="opacity" values="0;0;0;1" dur="3.5s"/>
+        </ellipse>
+    </g>
+</svg>

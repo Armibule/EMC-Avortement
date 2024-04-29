@@ -1,0 +1,171 @@
+:root {
+    --contrast: #d11db9;
+    
+    --gray: color-mix(in srgb, #bbbbcc, var(--contrast) 30%);
+    --grayTransparent: color-mix(in srgb, var(--gray), transparent 90%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: 
+        linear-gradient(0deg, transparent 70% , var(--grayTransparent) 70%),
+        linear-gradient(90deg, transparent 70%, var(--grayTransparent) 70%);
+    background-size: 2vw 2vw;
+    
+    transition: background-position 2s cubic-bezier( 0.175, 0.585, 0, 1.05 );
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+}
+
+#mainCanvas {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    transition: left 2s cubic-bezier( 0.175, 0.585, 0, 1.05 ), top 2s cubic-bezier( 0.175, 0.585, 0, 1.05 );
+}
+#mainCanvasWrapper {
+    position: relative;
+}
+h1 {
+    font-weight: 800;
+}
+.section {
+    position: absolute;
+    width: 80vw;
+    height: 80vh;
+    
+    background-color: #ffffff50;
+    padding: 2vw 3vw;
+    border-radius: 20px;
+    
+    box-shadow: 0 2px 12px #00000010;
+}
+#sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    
+    width: 20vw;
+    height: 100vh;
+    padding: 20px;
+    
+    color: white;
+    border-radius: 0 30px 30px 0;
+    transform: translateX(calc(-20vw + 50px + 20px));
+    
+    transition: all 0.4s cubic-bezier( 0.175, 0.585, 0.32, 1.175 ), height 0s;
+}
+.sidebar > * {
+    opacity: 0;
+}
+.sidebarOpened {   
+    text-shadow: 0 2px 1px #00000022;
+    background-color: #00000055;
+    box-shadow: 2px 0 2px #00000022;
+    backdrop-filter: blur(5px);
+    border-radius: 0 10px 10px 0;
+    transform: translateX(0);
+    
+    transition: all 0.3s, height 0s;
+}
+.sidebarOpened > * {
+    opacity: 1;
+}
+#burgerButton {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 50px;
+    
+    opacity: 0.5;
+    cursor: pointer;
+    
+    transition: all 0.2s;
+}
+#burgerButton:hover {
+    opacity: 0.6;
+    scale: 0.98;
+}
+#burgerButton:active {
+    opacity: 0.8;
+    scale: 0.96;
+}
+#burgerButton path {
+    transition: all 0.5s cubic-bezier( 0.175, 0.585, 0.32, 1.175 );
+}
+.sidebarOpened .burgerButtonBar2 {
+    opacity: 0;
+}
+#navigationItems {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.navigationItem {
+    padding: 8px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 2px #ddd;
+    box-shadow: 0 1px 2px #00000010;
+    
+    transition: all 0.2s;
+}
+.navigationItem:hover {
+    background-color: color-mix(in srgb, var(--contrast), white 70%);
+    border-color: color-mix(in srgb, var(--contrast), white 50%) !important;
+    box-shadow: 0 2px 4px #00000020;
+    scale: 0.99;
+}
+.navigationItem:active {
+    background-color: color-mix(in srgb, var(--contrast), white 20%);
+    border-color: color-mix(in srgb, var(--contrast), white 0%) !important;
+    color: white !important;
+    box-shadow: 0 2px 6px color-mix(in srgb, #00000025 90%, var(--contrast));
+    scale: 0.98;
+}
+
+/* TIMELINE */
+
+@keyframes timelineAnim {
+    from {
+        opacity: 0.8;
+        width: 20%;
+    } to {
+        opacity: 1;
+        width: 100%;
+    }
+}
+#timelineContainer {
+    display: flex;
+    
+    width: 100%;
+    height: 80px;
+    animation: timelineAnim 2s;
+}
+#timelineStripe {
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    background-color: color-mix(in srgb, var(--contrast), white 60%);
+    outline: solid 2px #0005;
+    border-radius: 5px 0 0 5px;
+}
+#timelineArrow {
+    width: 50px;
+    height: 80px;
+    background-color: color-mix(in srgb, var(--contrast), white 60%);
+    clip-path: polygon(0 5%, 2% 2%, 4% 2%, 95% 45%, 100% 50%, 95% 55%, 4% 98%, 2% 98%, 0 95%);
+}
