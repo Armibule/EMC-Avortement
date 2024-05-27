@@ -1,0 +1,614 @@
+:root {
+    --contrast: #d11db9;
+    --red: #d11d35;
+    
+    --gray: color-mix(in srgb, #bbbbcc, var(--contrast) 30%);
+    --grayTransparent: color-mix(in srgb, var(--gray), transparent 92%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: 
+        linear-gradient(0deg, transparent 70% , var(--grayTransparent) 70%),
+        linear-gradient(90deg, transparent 70%, var(--grayTransparent) 70%);
+    background-size: 2vw 2vw;
+    
+    transition: background-position 2s cubic-bezier( 0.175, 0.585, 0, 1.05 );
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+}
+
+#mainCanvas {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    transition: left 2s cubic-bezier( 0.175, 0.585, 0, 1.05 ), top 2s cubic-bezier( 0.175, 0.585, 0, 1.05 );
+}
+#mainCanvasWrapper {
+    position: relative;
+}
+h1 {
+    font-weight: 800;
+    margin: 0;
+    font-size: 2.5vw;
+}
+.section {
+    position: absolute;
+    width: 90vw;
+    height: 90vh;
+    
+    background-color: #ffffff50;
+    padding: 2vw 3vw;
+    border-radius: 20px;
+    
+    box-shadow: 0 2px 12px #00000010;
+    
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bab #0001;
+}
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    letter-spacing: -10px;
+    opacity: 0;
+    transition: all 0.5s 1s;
+    transition-timing-function: cubic-bezier(0,1.08,.78,1.16);
+}
+.sectionVisited .sectionTitle {
+    letter-spacing: 0px;
+    opacity: 1;
+}
+#sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 0;
+    height: 0;
+}
+.sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    
+    width: 20vw;
+    height: 100vh;
+    padding: 20px;
+    
+    color: white;
+    border-radius: 0 30px 30px 0;
+    transform: translateX(calc(-20vw + 50px + 20px));
+    
+    transition: all 0.4s cubic-bezier( 0.175, 0.585, 0.32, 1.175 ), height 0s;
+}
+.sidebar h2 {
+    font-size: 2vw;
+}
+.sidebar > * {
+    opacity: 0;
+}
+.sidebarOpened {   
+    text-shadow: 0 2px 1px #00000022;
+    background-color: #00000055;
+    box-shadow: 2px 0 2px #00000022;
+    backdrop-filter: blur(5px);
+    border-radius: 0 10px 10px 0;
+    transform: translateX(0);
+    
+    transition: all 0.3s cubic-bezier(.15,1.01,.45,.95), height 0s;
+}
+.sidebarOpened > * {
+    opacity: 1;
+}
+#burgerButton {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 50px;
+    
+    opacity: 0.5;
+    cursor: pointer;
+    
+    transition: all 0.2s;
+}
+#burgerButton:hover {
+    opacity: 0.6;
+    scale: 0.98;
+}
+#burgerButton:active {
+    opacity: 0.8;
+    scale: 0.96;
+}
+#burgerButton path {
+    transition: all 0.5s cubic-bezier( 0.175, 0.585, 0.32, 1.175 );
+}
+.sidebarOpened .burgerButtonBar2 {
+    opacity: 0;
+}
+#navigationItems {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.navigationItem {
+    padding: 8px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 2px #ddd;
+    box-shadow: 0 1px 2px #00000010;
+    font-size: 0.85vw;
+    
+    transition: all 0.2s;
+}
+.navigationItem:hover {
+    background-color: color-mix(in srgb, var(--contrast), white 70%);
+    border-color: color-mix(in srgb, var(--contrast), white 50%) !important;
+    box-shadow: 0 2px 4px #00000020;
+    scale: 0.99;
+}
+.navigationItem:active {
+    background-color: color-mix(in srgb, var(--contrast), white 20%);
+    border-color: color-mix(in srgb, var(--contrast), white 0%) !important;
+    color: white !important;
+    box-shadow: 0 2px 6px color-mix(in srgb, #00000025 90%, var(--contrast));
+    scale: 0.98;
+}
+
+ul, p {
+    font-size: 1.3vw;
+}
+a {
+    color: var(--contrast);
+}
+a:hover {
+    color: color-mix(in srgb, var(--contrast), black 20%)
+}
+b {
+    transition: color 0.5s 1s;
+}
+.sectionVisited b {
+    color: var(--contrast);
+}
+
+/* TIMELINE */
+
+@keyframes timelineAnim {
+    from {
+        opacity: 0.8;
+        width: 20%;
+    } to {
+        opacity: 1;
+        width: 100%;
+    }
+}
+#timelineContainer {
+    display: flex;
+    
+    width: 20%;
+    height: 80px;
+    margin-top: 200px;
+    animation-timing-function: cubic-bezier(0,1.08,.78,1.16);
+}
+.sectionVisited #timelineContainer {
+    animation: timelineAnim 2s 0.5s forwards;
+}
+#timelineStripe {
+    position: relative;
+    
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    background-color: color-mix(in srgb, var(--contrast), white 60%);
+    outline: solid 2px #0005;
+    border-radius: 5px 0 0 5px;
+}
+#timelineArrow {
+    width: 50px;
+    height: 80px;
+    background-color: color-mix(in srgb, var(--contrast), white 60%);
+    clip-path: polygon(0 5%, 2% 2%, 4% 2%, 95% 45%, 100% 50%, 95% 55%, 4% 98%, 2% 98%, 0 95%);
+}
+.timelineEvent {
+    position: absolute;
+    bottom: 80px;
+    
+    display: flex;
+    flex-direction: column;
+    width: 16vw;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+    
+    backdrop-filter: blur(2px);
+    border-radius: 5px;
+    background-color: #00000010;
+    outline: solid 2px #00000020;
+    padding: 10px;
+    
+    scale: 0;
+    transition: scale 0.8s 2s;
+    transition-timing-function: cubic-bezier(0,1.08,.78,1.16);
+}
+.sectionVisited .timelineEvent {
+    scale: 1;
+}
+.timelineEvent > h2 {
+    margin-block: 10px;
+}
+.timelineEvent > span {
+    text-align: center;
+}
+.downBar::before {
+    position: absolute;
+    content: "";
+        
+    bottom: -30px;
+    left: 6vw;
+    
+    width: 4px;
+    border-radius: 4px;
+    height: 30px;
+    background-color: #0004;
+}
+.timelineEventDown {
+    top: 80px;
+}
+.timelineEventDown .downBar::before {
+    top: -30px;
+}
+
+
+/* STATISTICS MAP */
+
+#svg-map {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    translate: -50% 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px #0005; 
+    
+    width: max-content;
+    height: 80%;
+}
+
+#svg-map text {
+    text-anchor: middle;
+    user-select: none;
+    pointer-events: none;
+    font-size: 40px;
+    font-family: sans-serif;
+    opacity: 0;
+    z-index: 5;
+    fill: white;
+    white-space: break-spaces;
+    transition: all 0.1s;
+}
+#svg-map text::before {
+    content: attr(data-abortion-count);
+
+}
+#svg-map text.hovered {
+    opacity: 1;
+    text-shadow: 0 0.5px 1px #0005;
+}
+
+#svg-map .landxx {
+ stroke-width: 0.5;
+ fill-rule: evenodd;
+ }
+#svg-map .coastxx {
+ stroke-width: 0.2;
+ }
+#svg-map .limitxx {
+ opacity: 0;
+}
+#svg-map
+ .antxx {
+ opacity: 1;
+}
+#svg-map g,
+#svg-map path {
+ transition: fill 0.2s ease-out;
+ }
+#svg-map #background {
+ fill: #87CEEB;
+ }
+#svg-map .landxx {
+ fill: var(--fillColor);
+ stroke: #FFDEAD;
+ }
+#svg-map g:hover path,
+#svg-map path:hover,
+#svg-map path.hover,
+#svg-map g.hover path {
+    fill: color-mix(in srgb, var(--fillColor), white 10%);
+    stroke: #fff;
+}
+
+#statsYear {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    
+    bottom: 40px;
+    left: 50%;
+    translate: -50% 0;
+    gap: 10px;
+    
+    width: 50%;
+    padding: 10px 15px;
+    backdrop-filter: blur(2px);
+    background-color: #0001;
+    outline: solid 2px #0002;
+    border-radius: 10px;
+}
+#statsYear label {
+    display: flex;
+    width: 100%;
+}
+#statsYearInput {
+  -webkit-appearance: none;
+  appearance: none; 
+  width: 100%;
+  cursor: pointer;
+  border-radius: 15px;
+  height: 10px;
+  background: #ccca;
+  outline: solid 1px #0002;
+}
+#statsYearInput::-moz-range-progress {
+  background: var(--contrast);
+  height: 10px;
+  border-radius: 15px;
+  outline: solid 2px color-mix(in srgb, var(--contrast), transparent);
+}
+#statsYearInput::-webkit-slider-thumb,
+#statsYearInput::-moz-range-thumb {
+  appearance: none;
+  height: 15px;
+  width: 15px;
+  border: none;
+  outline: solid 2px var(--gray);
+    
+  transition: all 0.2s;
+}
+/*#statsYearInput:hover::-webkit-slider-thumb,
+#statsYearInput:hover::-moz-range-thumb {
+  outline: solid 5px var(--grayTransparent);
+}*/
+
+
+/* Statistics */
+#statistics {
+    display: grid;
+    grid-template-areas: 
+        "a a b"
+        "c d d";
+    grid-template-rows: 1fr 1fr; 
+    background-color: white;
+    border-radius: 10px;
+    outline: solid 2px #00000008;
+    padding: 10px;
+    gap: 10px;
+}
+#statistics > * {
+    outline: solid 2px #00000008;
+    border-radius: 5px;
+    
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    
+    transition: outline 0.2s;
+}
+#abortionCounter:hover,
+#unsafeAbortionCounter:hover, 
+#illegalCountriesCounter:hover, 
+#percentageCounter:hover {
+    outline: solid 2px #00000020;
+}
+#abortionCounter {
+    grid-area: a;
+}
+#unsafeAbortionCounter {
+    grid-area: b;
+}
+#illegalCountriesCounter {
+    grid-area: c;
+}
+#percentageCounter {
+    grid-area: d;
+}
+#abortionCounterSeconds {
+    color: var(--contrast);
+    font-family: monospace;
+    font-size: 1.6vw;
+}
+#abortionCounterNumber {
+    color: var(--contrast);
+    font-family: monospace;
+    font-size: 2.5vw;
+}
+#unsafeAbortionCounter, #illegalCountriesCounter {
+    color: color-mix(in srgb, var(--red), black);
+}
+#unsafeAbortionCounterNumber, #illegalCountriesCounterNumber {
+    color: var(--red);
+    font-family: monospace;
+    font-size: 1.8vw;
+}
+#percentageCounterNumber {
+    color: var(--contrast);
+    font-family: monospace;
+    font-size: 1.8vw;
+}
+
+
+
+
+/*  Tendency */
+
+
+
+#tendencyMap path {
+  fill: lightgray; stroke: white;
+  stroke-width: 0.5px;
+  transition: all 0.2s;
+}
+#tendencyMap path:hover {
+  fill: color-mix(in srgb, lightgray 80%, gray);
+}
+#tendencyMap path[data-name="United States"],
+#tendencyMap path[data-name="El Salvador"],
+#tendencyMap path[data-name="Nicaragua"],
+#tendencyMap path[data-name="Poland"]{
+  fill: red;
+  stroke-width: 1px;
+  filter: drop-shadow(0 1px 1px #0008);
+  
+  &:hover {
+    fill: color-mix(in srgb, red 70%, darkred);
+  }
+}
+
+
+#tendencyMap path[data-name="Albania"],
+#tendencyMap path[data-name="Chile"],
+#tendencyMap path[data-name="Gabon"],
+#tendencyMap path[data-name="Liechtenstein"],
+#tendencyMap path[data-name="Nepal"],
+#tendencyMap path[data-name="South Korea"],
+#tendencyMap path[data-name="Angola"],
+#tendencyMap path[data-name="Colombia"],
+#tendencyMap path[data-name="Guinea"],
+#tendencyMap path[data-name="Luxembourg"],
+#tendencyMap path[data-name="New Zealand"],
+#tendencyMap path[data-name="Spain"],
+#tendencyMap path[data-name="Argentina"],
+#tendencyMap path[data-name="Côte d'Ivoire"],
+#tendencyMap path[data-name="Guyana"],
+#tendencyMap path[data-name="Maldives"],
+#tendencyMap path[data-name="Niger"],
+#tendencyMap path[data-name="St Lucia"],
+#tendencyMap path[data-name="Benin"],
+#tendencyMap path[data-name="Cyprus"],
+#tendencyMap path[data-name="Iceland"],
+#tendencyMap path[data-name="Mali"],
+#tendencyMap path[data-name="Northern Ireland"],
+#tendencyMap path[data-name="Switzerland"],
+#tendencyMap path[data-name="Bhutan"],
+#tendencyMap path[data-name="Democratic Republic of the Congo"],
+#tendencyMap path[data-name="India"],
+#tendencyMap path[data-name="Mauritius"],
+#tendencyMap path[data-name="Portugal"],
+#tendencyMap path[data-name="Thailand"],
+#tendencyMap path[data-name="Brazil"],
+#tendencyMap path[data-name="Ecuador"],
+#tendencyMap path[data-name="Indonesia"],
+#tendencyMap path[data-name="Mexico"],
+#tendencyMap path[data-name="Rwanda"],
+#tendencyMap path[data-name="Togo"],
+#tendencyMap path[data-name="Burkina Faso"],
+#tendencyMap path[data-name="Eritrea"],
+#tendencyMap path[data-name="Iran"],
+#tendencyMap path[data-name="Micronesia"],
+#tendencyMap path[data-name="San Marino"],
+#tendencyMap path[data-name="United Arab Emirates"],
+#tendencyMap path[data-name="Cambodia"],
+#tendencyMap path[data-name="Eswatini"],
+#tendencyMap path[data-name="Ireland"],
+#tendencyMap path[data-name="Monaco"],
+#tendencyMap path[data-name="Sao Time & Principe"],
+#tendencyMap path[data-name="Uruguay"],
+#tendencyMap path[data-name="Central African Republic"],
+#tendencyMap path[data-name="Ethiopia"],
+#tendencyMap path[data-name="Kenya"],
+#tendencyMap path[data-name="Mozambique"],
+#tendencyMap path[data-name="Somalia"],
+#tendencyMap path[data-name="Uzbekistan"],
+#tendencyMap path[data-name="Chad"],
+#tendencyMap path[data-name="Fiji"],
+#tendencyMap path[data-name="Lesotho"],
+#tendencyMap path[data-name="Nauru"],
+#tendencyMap path[data-name="South Africa"] {
+  fill: lightgreen;
+  stroke-width: 1px;
+  filter: drop-shadow(0 1px 1px #0008);
+  
+  &:hover {
+    fill: color-mix(in srgb, lightgreen 80%, green);
+  }
+}
+
+
+/* FAQ */
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+    margin-block: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    
+    background-color: white;
+    outline: solid 2px #0002;
+    cursor: pointer;
+}
+.questionContainerOpened {
+    gap: 8px;
+    outline: solid 2px color-mix(in srgb, transparent 80%, var(--contrast));
+}
+.question {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+.question::before {
+    content: "ᐅ";
+    position: absolute;
+    right: 0;
+    top: 0.2em;
+    font-weight: normal;
+    font-size: 0.85em;
+    opacity: 0.5;
+    transition: rotate 0.5s;
+    transition-timing-function: cubic-bezier(0,1.08,.78,1.16);
+}
+.answer {
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border-top: solid 2px transparent;
+    padding: 0px;
+    transition: all 0.4s;
+    transition-timing-function: cubic-bezier(0,1.08,.78,1.16);
+    font-size: 1.1em;
+    pointer-events: all;
+}
+.questionContainerOpened .question::before {
+    rotate: 90deg;
+}
+.questionContainerOpened .answer {
+    max-height: 500px;
+    border-top-color: #0002;
+    padding: 8px;
+}
+.answer p, .answer li, .answer {
+    font-size: 1.3rem;
+}
